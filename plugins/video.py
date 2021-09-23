@@ -105,7 +105,7 @@ async def stream(client, m: Message):
             await msg.edit(f"✖ An Error Occoured! \n\nError: `{e}`")
 
     elif media.video or media.document:
-        await msg.edit("<b>⥁</b>`Downloading ...`")
+        await msg.edit("<b>⥁</b> Downloading...")
         if media.video.thumbs:
             lol = media.video.thumbs[0]
             lel = await client.download_media(lol['file_id'])
@@ -191,7 +191,7 @@ async def resume(_, m: Message):
 @Client.on_message(filters.command(["endstream", f"endstream@{USERNAME}"]) & filters.group & ~filters.edited)
 @authorized_users_only
 async def endstream(client, m: Message):
-    msg = await m.reply_text("**⥁** `Processing ...`")
+    msg = await m.reply_text("**⥁**Processing...")
     chat_id = m.chat.id
 
     if chat_id in AUDIO_CALL:
