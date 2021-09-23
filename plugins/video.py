@@ -48,11 +48,11 @@ group_call = GroupCallFactory(User, GroupCallFactory.MTPROTO_CLIENT_TYPE.PYROGRA
 @Client.on_message(filters.command(["stream", f"stream@{USERNAME}"]) & filters.group & ~filters.edited)
 @authorized_users_only
 async def stream(client, m: Message):
-    msg = await m.reply_text("🔄 `Processing ...`")
+    msg = await m.reply_text("Processing...")
     chat_id = m.chat.id
     media = m.reply_to_message
     if not media and not ' ' in m.text:
-        await msg.edit("❗ __Send Me An Live Stream Link / YouTube Video Link / Reply To An Video To Start Video Streaming!__")
+        await msg.edit("❗Send Me An Live Stream Link / YouTube Video Link / Reply To An Video To Start Video Streaming!")
 
     elif ' ' in m.text:
         text = m.text.split(' ', 1)
@@ -60,7 +60,7 @@ async def stream(client, m: Message):
         regex = r"^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+"
         match = re.match(regex, query)
         if match:
-            await msg.edit("🔄 `Starting YouTube Video Stream ...`")
+            await msg.edit("<b>↻</b>Starting YouTube Video Stream...")
             try:
                 meta = ydl.extract_info(query, download=False)
                 formats = meta.get('formats', [meta])
@@ -74,13 +74,13 @@ async def stream(client, m: Message):
                 split = thumbid.split("?")
                 thumb = split[0].strip()
             except Exception as e:
-                await msg.edit(f"❌ **YouTube Download Error !** \n\n`{e}`")
+                await msg.edit(f"✖ **YouTube Download Error !** \n\n`{e}`")
                 print(e)
                 return
         else:
-            await msg.edit("🔄 `Starting Live Video Stream ...`")
+            await msg.edit("<b>↻</b>Starting Live Video Stream...")
             link = query
-            thumb = "https://telegra.ph/file/3e14128ad5c9ec47801bd.jpg"
+            thumb = "https://telegra.ph/file/9945e3df3c3204c01c4c0.png"
 
         vid_call = VIDEO_CALL.get(chat_id)
         if vid_call:
@@ -99,19 +99,19 @@ async def stream(client, m: Message):
             await group_call.join(chat_id)
             await group_call.start_video(link, with_audio=True, repeat=False)
             VIDEO_CALL[chat_id] = group_call
-            await m.reply_photo(photo=thumb, caption=f"▶️ **Started [Video Streaming]({query}) In {m.chat.title} !**")
+            await m.reply_photo(photo=thumb, caption=f"<b>ᐅ</b>Started [Video Streaming]({query}) In {m.chat.title} !")
             await msg.delete()
         except Exception as e:
-            await msg.edit(f"❌ **An Error Occoured !** \n\nError: `{e}`")
+            await msg.edit(f"✖ An Error Occoured! \n\nError: `{e}`")
 
     elif media.video or media.document:
-        await msg.edit("🔄 `Downloading ...`")
+        await msg.edit("<b>⥁</b>`Downloading ...`")
         if media.video.thumbs:
             lol = media.video.thumbs[0]
             lel = await client.download_media(lol['file_id'])
             thumb = lel
         else:
-            thumb = "https://telegra.ph/file/62e86d8aadde9a8cbf9c2.jpg"
+            thumb = "https://telegra.ph/file/e88eba427d59956dbc1ef.png"
         video = await client.download_media(media)
 
         vid_call = VIDEO_CALL.get(chat_id)
@@ -131,10 +131,10 @@ async def stream(client, m: Message):
             await group_call.join(chat_id)
             await group_call.start_video(video, with_audio=True, repeat=False)
             VIDEO_CALL[chat_id] = group_call
-            await m.reply_photo(photo=thumb, caption=f"▶️ **Started [Video Streaming](https://t.me/AsmSafone) In {m.chat.title} !**")
+            await m.reply_photo(photo=thumb, caption=f"<b>ᐅ</b>Started [Video Streaming](https://t.me/AsmSafone) In {m.chat.title} !**")
             await msg.delete()
         except Exception as e:
-            await msg.edit(f"❌ **An Error Occoured !** \n\nError: `{e}`")
+            await msg.edit(f"✖ **An Error Occoured!** \n\nError: `{e}`")
 
     else:
         await msg.edit(
@@ -143,10 +143,10 @@ async def stream(client, m: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "✅ Yes", switch_inline_query_current_chat=""
+                        "✔ Yes", switch_inline_query_current_chat=""
                     ),
                     InlineKeyboardButton(
-                        "No ❌", callback_data="close"
+                        "No ✖", callback_data="close"
                     )
                 ]
             ]
@@ -161,14 +161,14 @@ async def pause(_, m: Message):
 
     if chat_id in AUDIO_CALL:
         await AUDIO_CALL[chat_id].set_audio_pause(True)
-        await m.reply_text("⏸ **Paused Audio Streaming !**")
+        await m.reply_text("<b>।।</b> Paused Audio Streaming!")
 
     elif chat_id in VIDEO_CALL:
         await VIDEO_CALL[chat_id].set_video_pause(True)
-        await m.reply_text("⏸ **Paused Video Streaming !**")
+        await m.reply_text("<b>।।</b> Paused Video Streaming!")
 
     else:
-        await m.reply_text("❌ **Noting Is Streaming !**")
+        await m.reply_text("✖ Noting Is Streaming!")
 
 
 @Client.on_message(filters.command(["resume", f"resume@{USERNAME}"]) & filters.group & ~filters.edited)
@@ -178,31 +178,31 @@ async def resume(_, m: Message):
 
     if chat_id in AUDIO_CALL:
         await AUDIO_CALL[chat_id].set_audio_pause(False)
-        await m.reply_text("▶️ **Resumed Audio Streaming !**")
+        await m.reply_text("**ᐅ** Resumed Audio Streaming!")
 
     elif chat_id in VIDEO_CALL:
         await VIDEO_CALL[chat_id].set_video_pause(False)
-        await m.reply_text("▶️ **Resumed Video Streaming !**")
+        await m.reply_text("**ᐅ** Resumed Video Streaming!")
 
     else:
-        await m.reply_text("❌ **Noting Is Streaming !**")
+        await m.reply_text("✖ Noting Is Streaming!")
 
 
 @Client.on_message(filters.command(["endstream", f"endstream@{USERNAME}"]) & filters.group & ~filters.edited)
 @authorized_users_only
 async def endstream(client, m: Message):
-    msg = await m.reply_text("🔄 `Processing ...`")
+    msg = await m.reply_text("**⥁** `Processing ...`")
     chat_id = m.chat.id
 
     if chat_id in AUDIO_CALL:
         await AUDIO_CALL[chat_id].stop()
         AUDIO_CALL.pop(chat_id)
-        await msg.edit("⏹️ **Stopped Audio Streaming !**")
+        await msg.edit("■ Stopped Audio Streaming!")
 
     elif chat_id in VIDEO_CALL:
         await VIDEO_CALL[chat_id].stop()
         VIDEO_CALL.pop(chat_id)
-        await msg.edit("⏹️ **Stopped Video Streaming !**")
+        await msg.edit("■ Stopped Video Streaming!")
 
     else:
         await msg.edit("🤖 **Please Start An Stream First !**")
