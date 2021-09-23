@@ -52,7 +52,7 @@ async def search(client, query):
         await client.answer_inline_query(
             query.id,
             results=answers,
-            switch_pm_text=("✍️ Type An Video Name!"),
+            switch_pm_text=("✏ Type An Video Name!"),
             switch_pm_parameter="help",
             cache_time=0
         )
@@ -83,7 +83,7 @@ async def search(client, query):
             await query.answer(
                 results=answers,
                 cache_time=0,
-                switch_pm_text=("❌ No Results Found!"),
+                switch_pm_text=("✖ No Results Found!"),
                 switch_pm_parameter="",
             )
 
