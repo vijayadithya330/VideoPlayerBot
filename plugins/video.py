@@ -111,7 +111,7 @@ async def stream(client, m: Message):
             lel = await client.download_media(lol['file_id'])
             thumb = lel
         else:
-            thumb = "https://telegra.ph/file/e88eba427d59956dbc1ef.png"
+            thumb = "https://telegra.ph/file/62e86d8aadde9a8cbf9c2.jpg"
         video = await client.download_media(media)
 
         vid_call = VIDEO_CALL.get(chat_id)
