@@ -34,8 +34,7 @@ async def start(client, message):
             [
                 InlineKeyboardButton("📢 CHANNEL", url=f"https://t.me/{UPDATES_CHANNEL}"),
                 InlineKeyboardButton("🧑🏻‍💻 Developer", url=f"https://t.me/Teddy3300"),
-            ].
-            [
+            ],[
                InlineKeyboardButton("➕ ADD ME TO YOUR GROUP ➕", url=f"https://t.me/{USERNAME}?startgroup=true"),
             ]
             ]
@@ -74,8 +73,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             [
                 InlineKeyboardButton("📢 CHANNEL", url=f"https://t.me/{UPDATES_CHANNEL}"),
                 InlineKeyboardButton("🧑🏻‍💻 Developer", url=f"https://t.me/Teddy3300"),
-            ],
-            [
+            ],[
                InlineKeyboardButton("➕ ADD ME TO YOUR GROUP ➕", url=f"https://t.me/{USERNAME}?startgroup=true"),
             ]
             ]
