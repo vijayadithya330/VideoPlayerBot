@@ -33,12 +33,8 @@ async def start(client, message):
             ],
             [
                 InlineKeyboardButton("📢 CHANNEL", url=f"https://t.me/{UPDATES_CHANNEL}"),
-                InlineKeyboardButton("SOURCE 📦", url=f"https://github.com/AsmSafone/VideoPlayerBot"),
-            ],
-            [
-                InlineKeyboardButton("🤖 ABOUT", callback_data="about"),
-                InlineKeyboardButton("CLOSE 🔒", callback_data="close"),
-            ],
+                InlineKeyboardButton("🧑🏻‍💻 Developer", url=f"https://t.me/Teddy3300"),
+            ].
             [
                InlineKeyboardButton("➕ ADD ME TO YOUR GROUP ➕", url=f"https://t.me/{USERNAME}?startgroup=true"),
             ]
@@ -70,22 +66,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
         except MessageNotModified:
             pass
 
-    elif query.data=="about":
-        buttons = [
-            [
-                InlineKeyboardButton("🔙 BACK", callback_data="start"),
-                InlineKeyboardButton ("SUPPORT 💬", url=f"https://t.me/{SUPPORT_GROUP}"),
-            ]
-            ]
-        reply_markup = InlineKeyboardMarkup(buttons)
-        try:
-            await query.edit_message_text(
-                ABOUT_TEXT,
-                reply_markup=reply_markup
-            )
-        except MessageNotModified:
-            pass
-
     elif query.data=="start":
         buttons = [
             [
@@ -93,11 +73,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             ],
             [
                 InlineKeyboardButton("📢 CHANNEL", url=f"https://t.me/{UPDATES_CHANNEL}"),
-                InlineKeyboardButton("SOURCE 📦", url=f"https://github.com/AsmSafone/VideoPlayerBot"),
-            ],
-            [
-                InlineKeyboardButton("🤖 ABOUT", callback_data="about"),
-                InlineKeyboardButton("CLOSE 🔒", callback_data="close"),
+                InlineKeyboardButton("🧑🏻‍💻 Developer", url=f"https://t.me/Teddy3300"),
             ],
             [
                InlineKeyboardButton("➕ ADD ME TO YOUR GROUP ➕", url=f"https://t.me/{USERNAME}?startgroup=true"),
